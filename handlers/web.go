@@ -1,7 +1,7 @@
 package handlers
 
 import (
-	chiopentelemetry "chi-opentelemetry"
+	"chi-opentelemetry/tracing"
 	"context"
 	"errors"
 	"net/http"
@@ -9,7 +9,6 @@ import (
 
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/codes"
-	"go.opentelemetry.io/otel/trace"
 )
 
 func Hello(w http.ResponseWriter, r *http.Request) {
@@ -19,7 +18,7 @@ func Hello(w http.ResponseWriter, r *http.Request) {
 	time.Sleep(50 * time.Millisecond)
 	res, err := formatHello(sctx, name)
 	if err != nil {
-		span := trace.SpanFromContext(sctx)
+		span := tracing.NewSpanFromContext(sctx)
 		span.SetStatus(codes.Error, err.Error())
 		span.AddEvent("query parameter 'name' is empty")
 		w.WriteHeader(http.StatusBadRequest)
@@ -29,7 +28,7 @@ func Hello(w http.ResponseWriter, r *http.Request) {
 }
 
 func formatHello(ctx context.Context, name string) ([]byte, error) {
-	_, span := chiopentelemetry.Tracer.Start(ctx, "formatHello")
+	_, span := tracing.NewSpan(ctx, "formatHello")
 	defer span.End()
 
 	span.SetAttributes(attribute.KeyValue{
