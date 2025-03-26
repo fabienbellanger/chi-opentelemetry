@@ -21,7 +21,6 @@ func main() {
 			log.Fatalf("traceprovider: %v", err)
 		}
 	}()
-	_ = traceProvider.Tracer("chi-telemetry")
 
 	r := chi.NewRouter()
 	r.Use(middleware.Logger)
