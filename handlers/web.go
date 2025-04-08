@@ -32,8 +32,11 @@ func formatHello(ctx context.Context, name string) ([]byte, error) {
 	defer span.End()
 
 	span.SetAttributes(attribute.KeyValue{
-		Key:   "name",
+		Key:   "attr.name",
 		Value: attribute.StringValue(name),
+	}, attribute.KeyValue{
+		Key:   "attr.test",
+		Value: attribute.StringValue("test an other attribute"),
 	})
 
 	time.Sleep(100 * time.Millisecond)

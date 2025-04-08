@@ -1,0 +1,13 @@
+@base_url = http://localhost:3000
+
+# Home : 200
+GET {{base_url}}?name=John
+Content-Type: application/json
+
+###
+
+# Home : 400
+GET {{base_url}}
+Content-Type: application/json
+
+###

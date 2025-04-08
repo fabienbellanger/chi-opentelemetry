@@ -33,6 +33,7 @@ func StartTracing() (*trace.TracerProvider, error) {
 		context.Background(),
 		otlptracehttp.NewClient(
 			otlptracehttp.WithEndpoint("localhost:4318"),
+			otlptracehttp.WithCompression(otlptracehttp.GzipCompression),
 			otlptracehttp.WithHeaders(headers),
 			otlptracehttp.WithInsecure(),
 		),
