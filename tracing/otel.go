@@ -52,7 +52,7 @@ func StartTracing() (*trace.TracerProvider, error) {
 		trace.WithResource(
 			resource.NewWithAttributes(
 				semconv.SchemaURL,
-				semconv.ServiceNameKey.String("chi-telemetry"),
+				semconv.ServiceNameKey.String(otelScopeName),
 			),
 		),
 	)
@@ -62,7 +62,7 @@ func StartTracing() (*trace.TracerProvider, error) {
 	return tracerprovider, nil
 }
 
-func NewSpanFromContext(ctx context.Context) otelTrace.Span {
+func SpanFromContext(ctx context.Context) otelTrace.Span {
 	span := otelTrace.SpanFromContext(ctx)
 
 	_, file, line, ok := runtime.Caller(1)

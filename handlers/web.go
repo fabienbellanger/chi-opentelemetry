@@ -18,7 +18,7 @@ func Hello(w http.ResponseWriter, r *http.Request) {
 	time.Sleep(50 * time.Millisecond)
 	res, err := formatHello(sctx, name)
 	if err != nil {
-		span := tracing.NewSpanFromContext(sctx)
+		span := tracing.SpanFromContext(sctx)
 		span.SetStatus(codes.Error, err.Error())
 		span.AddEvent("query parameter 'name' is empty")
 		w.WriteHeader(http.StatusBadRequest)
