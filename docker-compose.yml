@@ -3,7 +3,6 @@ services:
     image: jaegertracing/jaeger:latest
     restart: no
     environment:
-      - COLLECTOR_ZIPKIN_HOST_PORT=:9411
       - COLLECTOR_OTLP_ENABLED=true
     ports:
       - "16686:16686"
