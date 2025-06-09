@@ -39,7 +39,7 @@ func formatHello(ctx context.Context, name string) ([]byte, error) {
 		Value: attribute.StringValue("test an other attribute"),
 	})
 
-	time.Sleep(100 * time.Millisecond)
+	time.Sleep(500 * time.Millisecond)
 
 	if name == "" {
 		return []byte(""), errors.New("name is empty")

@@ -26,6 +26,6 @@ func main() {
 	r.Use(middleware.Logger)
 	r.Get("/", tracing.Trace(handlers.Hello, "hello-handler"))
 
-	log.Println("Server is running on localhost:3000")
-	http.ListenAndServe(":3000", r)
+	log.Println("Server is running on localhost:3222")
+	http.ListenAndServe(":3222", r)
 }
